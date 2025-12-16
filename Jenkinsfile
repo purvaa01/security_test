@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        sonarScanner 'SonarScanner'
-    }
-
     stages {
         stage('Checkout Code') {
             steps {
@@ -17,9 +13,9 @@ pipeline {
                 withSonarQubeEnv('SonarQube') {
                     sh '''
                     sonar-scanner \
-                    -Dsonar.projectKey=security-test \
-                    -Dsonar.projectName=SecurityTest \
-                    -Dsonar.sources=.
+                      -Dsonar.projectKey=security-test \
+                      -Dsonar.projectName=SecurityTest \
+                      -Dsonar.sources=.
                     '''
                 }
             }
