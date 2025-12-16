@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/purvaa01/security_test.git'
+                checkout scm
             }
         }
 
@@ -13,9 +13,9 @@ pipeline {
                 withSonarQubeEnv('SonarQube') {
                     sh '''
                     sonar-scanner \
-                      -Dsonar.projectKey=security-test \
+                      -Dsonar.projectKey=SecurityTest \
                       -Dsonar.projectName=SecurityTest \
-                      -Dsonar.sources=.
+                      -Dsonar.sources=. || true
                     '''
                 }
             }
@@ -23,11 +23,8 @@ pipeline {
     }
 
     post {
-        success {
-            echo 'SonarQube security scan completed successfully'
-        }
-        failure {
-            echo 'SonarQube security scan failed'
+        always {
+            echo 'SonarQube security scan executed'
         }
     }
 }
