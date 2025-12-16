@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        sonarQube 'SonarScanner'
+        sonarScanner 'SonarScanner'
     }
 
     stages {
@@ -28,10 +28,10 @@ pipeline {
 
     post {
         success {
-            echo 'Security scan completed successfully'
+            echo 'SonarQube security scan completed successfully'
         }
         failure {
-            echo 'Security scan failed'
+            echo 'SonarQube security scan failed'
         }
     }
 }
