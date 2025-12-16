@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        sonarQube 'SonarQubd'
+    }
+
     stages {
 
         stage('Checkout Code') {
