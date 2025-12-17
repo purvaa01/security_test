@@ -9,13 +9,17 @@ pipeline {
         }
 
         stage('SonarQube Security Scan') {
+            environment {
+                SONAR_TOKEN = credentials('sonar-token')
+            }
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh '''
                     sonar-scanner \
                       -Dsonar.projectKey=SecurityTest \
                       -Dsonar.projectName=SecurityTest \
-                      -Dsonar.sources=. || true
+                      -Dsonar.sources=. \
+                      -Dsonar.login=$SONAR_TOKEN
                     '''
                 }
             }
