@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        sonarScanner 'SonarScanner'
+    }
+
     stages {
         stage('Checkout Code') {
             steps {
@@ -19,16 +23,3 @@ pipeline {
                       -Dsonar.projectKey=SecurityTest \
                       -Dsonar.projectName=SecurityTest \
                       -Dsonar.sources=. \
-                      -Dsonar.login=$SONAR_TOKEN
-                    '''
-                }
-            }
-        }
-    }
-
-    post {
-        always {
-            echo 'SonarQube security scan executed'
-        }
-    }
-}
