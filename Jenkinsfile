@@ -1,11 +1,8 @@
 pipeline {
     agent any
 
-    tools {
-        sonarScanner 'SonarScanner'
-    }
-
     stages {
+
         stage('Checkout Code') {
             steps {
                 checkout scm
@@ -19,7 +16,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh '''
-                    sonar-scanner \
+                    /opt/sonar-scanner/sonar-scanner-7.3.0.5189-linux-x64/bin/sonar-scanner \
                       -Dsonar.projectKey=SecurityTest \
                       -Dsonar.projectName=SecurityTest \
                       -Dsonar.sources=. \
